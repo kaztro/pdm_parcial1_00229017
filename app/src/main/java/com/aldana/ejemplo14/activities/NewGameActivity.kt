@@ -47,6 +47,7 @@ class NewGameActivity : AppCompatActivity() {
                 setResult(Activity.RESULT_CANCELED, replyIntent)
             } else {
                 val game1 = editATeamView.text.toString()
+                replyIntent.putExtra(EXTRA_REPLY, game1)
                 val game2 = editBTeamView.text.toString()
 
 
