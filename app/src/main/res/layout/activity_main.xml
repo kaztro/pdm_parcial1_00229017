@@ -4,14 +4,14 @@
     <data>
         <variable
                 name="score"
-                type="com.aldana.ejemplo14.ScoreViewModel" />
+                type="com.aldana.ejemplo14.viewmodels.ScoreViewModel" />
     </data>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                   xmlns:tools="http://schemas.android.com/tools"
                   android:layout_width="match_parent"
                   android:layout_height="match_parent"
                   android:orientation="vertical"
-                  tools:context=".MainActivity">
+                  tools:context=".activities.MainActivity">
 
         <LinearLayout
                 android:layout_width="match_parent"

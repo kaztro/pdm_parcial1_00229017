@@ -1,4 +1,4 @@
-package com.aldana.ejemplo14
+package com.aldana.ejemplo14.constants
 
 object AppConstants {
     val SCORE_A = "SCOREAKEY"

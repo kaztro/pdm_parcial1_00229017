@@ -1,9 +1,12 @@
-package com.aldana.ejemplo14
+package com.aldana.ejemplo14.activities
 
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import com.aldana.ejemplo14.constants.AppConstants
+import com.aldana.ejemplo14.R
+import com.aldana.ejemplo14.viewmodels.ScoreViewModel
 import com.aldana.ejemplo14.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -21,7 +24,9 @@ class MainActivity : AppCompatActivity() {
             scoreViewModel.scoreTeamB.set("0")
         }
 
-        var dataBinding : ActivityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        var dataBinding : ActivityMainBinding = DataBindingUtil.setContentView(this,
+            R.layout.activity_main
+        )
         dataBinding.score = scoreViewModel
 
     }

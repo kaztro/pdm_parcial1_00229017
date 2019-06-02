@@ -1,4 +1,4 @@
-package com.aldana.ejemplo14.entities
+package com.aldana.ejemplo14.models
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
