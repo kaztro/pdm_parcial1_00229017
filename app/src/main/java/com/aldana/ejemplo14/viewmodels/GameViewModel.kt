@@ -11,7 +11,7 @@ import com.aldana.ejemplo14.repository.GameRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class ScoreViewModel(application: Application) : AndroidViewModel(application) {
+class GameViewModel(application: Application) : AndroidViewModel(application) {
     var scoreTeamA = ObservableField<String>()
     var scoreTeamB = ObservableField<String>()
 

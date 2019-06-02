@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "game_table")
 data class Game (
 
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     @ColumnInfo(name = "game_id")
     val gameId: Int,
 
@@ -19,5 +19,8 @@ data class Game (
     @ColumnInfo(name = "b_team")
     val bTeam: String,
     @ColumnInfo(name = "b_team_score")
-    val bScore: String
+    val bScore: String,
+
+    @ColumnInfo(name = "game_date")
+    val gameDate: String
 )
