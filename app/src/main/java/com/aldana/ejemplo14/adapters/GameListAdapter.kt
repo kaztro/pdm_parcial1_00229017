@@ -7,17 +7,20 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.aldana.ejemplo14.R
+import com.aldana.ejemplo14.activities.GameDTO
 import com.aldana.ejemplo14.models.Game
+import kotlinx.android.synthetic.main.recyclerview_item.view.*
 
-class GameListAdapter internal constructor(
-    context: Context
-) : RecyclerView.Adapter<GameListAdapter.GameViewHolder>(){
+class GameListAdapter (context: Context, val clickListener: (GameDTO) -> Unit) : RecyclerView.Adapter<GameListAdapter.GameViewHolder>(){
 
     private val inflater: LayoutInflater = LayoutInflater.from(context)
-    private var games = emptyList<Game>()
+    private var games = emptyList<GameDTO>()
 
     inner class GameViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val gameItemView: TextView = itemView.findViewById(R.id.tv_game)
+        fun bind(item: GameDTO,clickListener: (GameDTO) -> Unit) = with(itemView){
+            tv_game.text = item.equipoA + " vs " + item.equipoB
+            this.setOnClickListener { clickListener(item) }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GameViewHolder {
@@ -27,10 +30,10 @@ class GameListAdapter internal constructor(
 
     override fun onBindViewHolder(holder: GameViewHolder, position: Int) {
         val current = games[position]
-        holder.gameItemView.text = current.aTeam + "VS" + current.bTeam
+        holder.bind(current, clickListener)
     }
 
-    internal fun setWords(games: List<Game>) {
+    internal fun setGame(games: List<GameDTO>) {
         this.games = games
         notifyDataSetChanged()
     }

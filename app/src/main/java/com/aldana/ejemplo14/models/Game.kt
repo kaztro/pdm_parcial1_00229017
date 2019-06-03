@@ -7,20 +7,17 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "game_table")
 data class Game (
 
-    @PrimaryKey
-    @ColumnInfo(name = "game_id")
-    val gameId: Int,
-
     @ColumnInfo(name = "a_team")
     val aTeam: String,
     @ColumnInfo(name = "a_team_score")
-    val aScore: String,
+    val aScore: Int,
 
     @ColumnInfo(name = "b_team")
     val bTeam: String,
     @ColumnInfo(name = "b_team_score")
-    val bScore: String,
-
-    @ColumnInfo(name = "game_date")
-    val gameDate: String
-)
+    val bScore: Int
+) {
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "game_id")
+    var gameId: Int = 0
+}

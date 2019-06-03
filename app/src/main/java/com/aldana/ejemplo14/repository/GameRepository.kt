@@ -7,11 +7,13 @@ import com.aldana.ejemplo14.models.Game
 
 class GameRepository(private val gameDao: GameDao) {
 
-    val allGames: LiveData<List<Game>> = gameDao.getAllGames()
+    fun allGames(): LiveData<List<Game>> = gameDao.getAllGames()
 
     @WorkerThread
     suspend fun insert(game: Game) = gameDao.insert(game)
 
     @WorkerThread
     suspend fun delete() = gameDao.deleteAll()
+
+    fun  getGameById(id:Int): LiveData<List<Game>> = gameDao.getPartidoById(id)
 }

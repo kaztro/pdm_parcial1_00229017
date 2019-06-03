@@ -12,17 +12,16 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class GameViewModel(application: Application) : AndroidViewModel(application) {
-    var scoreTeamA = ObservableField<String>()
-    var scoreTeamB = ObservableField<String>()
-
-    private val repository: GameRepository
-    val allGames: LiveData<List<Game>>
+    private var gameRepository: GameRepository? = null
 
     init {
-        val gamesDao = MainDatabase.getDatabase(application).gameDao()
-        repository = GameRepository(gamesDao)
-        allGames = repository.allGames
+        val gameDao = MainDatabase.getDatabase(application, viewModelScope).gameDao()
+        gameRepository = GameRepository(gameDao)
     }
 
-    fun insert(game: Game) = viewModelScope.launch(Dispatchers.IO) { repository.insert(game) }
+    fun insertGame(game: Game) = viewModelScope.launch(Dispatchers.IO){
+        gameRepository!!.insert(game)
+    }
+
+    fun getAllGames(): LiveData<List<Game>> = gameRepository!!.allGames()
 }

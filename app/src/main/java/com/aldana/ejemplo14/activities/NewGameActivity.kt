@@ -1,5 +1,6 @@
 package com.aldana.ejemplo14.activities
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -14,6 +15,8 @@ import com.aldana.ejemplo14.constants.AppConstants
 import com.aldana.ejemplo14.databinding.ActivityMainBinding
 import com.aldana.ejemplo14.viewmodels.GameViewModel
 import kotlinx.android.synthetic.main.activity_new_game.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 class NewGameActivity : AppCompatActivity() {
 
@@ -21,6 +24,7 @@ class NewGameActivity : AppCompatActivity() {
     private lateinit var editATeamView: EditText
     private lateinit var editBTeamView: EditText
 
+    @SuppressLint("SimpleDateFormat")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -40,20 +44,39 @@ class NewGameActivity : AppCompatActivity() {
 
         button.setOnClickListener {
             val replyIntent = Intent()
+            val reply = Bundle()
             if(TextUtils.isEmpty(editATeamView.text)
                 || TextUtils.isEmpty(editBTeamView.text)
                 || scoreViewModel.scoreTeamA.get().equals("0")
                 || scoreViewModel.scoreTeamB.get().equals("0")) {
                 setResult(Activity.RESULT_CANCELED, replyIntent)
             } else {
-                val game1 = editATeamView.text.toString()
-                replyIntent.putExtra(EXTRA_REPLY, game1)
-                val game2 = editBTeamView.text.toString()
-
-
+                val calendar : Calendar = java.util.Calendar.getInstance()
+                val calendarFormat = SimpleDateFormat("dd/MM/yyyy h:mm a")
+                lateinit var gWinner: String
+                if(scoreViewModel.scoreTeamA.get().toString().toInt() > scoreViewModel.scoreTeamA.get().toString().toInt()) {
+                    gWinner = editATeamView.text.toString()
+                }else {
+                    gWinner = editBTeamView.text.toString()
+                }
+                reply.putString(DATE, "DATE: "+calendarFormat.format(calendar.time))
+                reply.putString(A_NAME, editATeamView.text.toString())
+                reply.putString(B_NAME, editBTeamView.text.toString())
+                reply.putString(A_SCORE, scoreViewModel.scoreTeamA.get().toString())
+                reply.putString(B_SCORE, scoreViewModel.scoreTeamB.get().toString())
+                reply.putString(WINNER, gWinner)
             }
 
         }
+    }
+
+    companion object {
+        const val DATE = "date"
+        const val A_NAME = "a_name"
+        const val B_NAME = "b_name"
+        const val A_SCORE = "a_score"
+        const val B_SCORE = "b_score"
+        const val WINNER = "winner"
     }
 
     fun addScore(view : View){
